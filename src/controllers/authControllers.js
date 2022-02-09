@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid"
 
 export async function signIn(req, res){
   try{
-    const { userAuth } = use.locals
+    const { userAuth } = res.locals
 
     const userRegistered = await db.collection("users").findOne({email: userAuth.email})
     if(!userRegistered)
@@ -17,7 +17,8 @@ export async function signIn(req, res){
     await db.collection("sessions").insertOne({token, userId: userRegistered._id})
 
     res.send({token})
-  } catch {
+  } catch (error) {
+    console.log(error)
     res.sendStatus(500)
   }
 }

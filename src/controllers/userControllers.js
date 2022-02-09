@@ -14,7 +14,8 @@ export async function signUp(req, res){
     db.collection("users").insertOne({...user, password})
     
     res.sendStatus(201)
-  } catch {
+  } catch (error) {
+    console.log(error)
     res.sendStatus(500)
   }
 }
