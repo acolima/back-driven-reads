@@ -2,7 +2,7 @@ import db from "../db.js"
 import bcrypt from "bcrypt"
 import { v4 as uuid } from "uuid"
 
-async function signIn(req, res){
+export async function signIn(req, res){
   try{
     const { userAuth } = use.locals
 
@@ -14,12 +14,10 @@ async function signIn(req, res){
       return res.status(401).send("Email e/ou senha incorretos")
 
     const token = uuid()
-    db.collection("sessions").insertOne({token, userId: userRegistered._id})
+    await db.collection("sessions").insertOne({token, userId: userRegistered._id})
 
     res.send({token})
   } catch {
     res.sendStatus(500)
   }
 }
-
-export default signIn
