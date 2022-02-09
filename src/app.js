@@ -1,7 +1,7 @@
-import "./src/setup.js"
+import "./setup.js"
 import express, { json } from "express"
 import cors from "cors"
-import router from "./src/routes/index.js"
+import router from "./routes/index.js"
 
 const server = express()
 

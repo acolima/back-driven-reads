@@ -1,4 +1,4 @@
-import "./src/setup.js"
+import "./setup.js"
 import { MongoClient} from "mongodb"
 
 const mongoClient = new MongoClient(process.env.MONGO_URI)
