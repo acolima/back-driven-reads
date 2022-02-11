@@ -7,6 +7,6 @@ bookRouter.get("/books", getBooks);
 bookRouter.post("/search", searchBook);
 bookRouter.post("/books", addBook);
 bookRouter.post("/bag", sendToBag);
-bookRouter.get("/bag", getBag):
+bookRouter.get("/bag", getBag);
 
 export default bookRouter;
