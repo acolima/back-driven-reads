@@ -5,8 +5,7 @@ export async function getBook(req, res) {
 
   try {
     const book = await db.collection("books").findOne({ ISBN: isbn })
-
-    res.status(200).send(book)
+    res.send(book)
   } catch {
     res.sendStatus(500)
   }
