@@ -7,6 +7,7 @@ export async function signUp(req, res){
     
     const emailRegistered = await db.collection("users").findOne({email: user.email})
     if(emailRegistered)
+
     return res.status(409).send("Email já cadastrado")
     
     const password = bcrypt.hashSync(user.password, 10)
