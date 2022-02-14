@@ -1,18 +1,14 @@
 import { Router } from "express"
 import userRouter from "./userRouter.js"
-<<<<<<< HEAD
-import bookRouter from "./bookRouter.js"
-=======
 import authRouter from "./authRouter.js"
->>>>>>> main
+import bagRouter from "./bagRouter.js"
+import bookRouter from "./bookRouter.js"
 
 const router = Router()
 
 router.use(userRouter)
-<<<<<<< HEAD
-router.use(bookRouter)
-=======
 router.use(authRouter)
->>>>>>> main
+router.use(bagRouter)
+router.use(bookRouter)
 
 export default router

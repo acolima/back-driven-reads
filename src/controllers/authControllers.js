@@ -14,9 +14,12 @@ export async function signIn(req, res){
       return res.status(401).send("Email e/ou senha incorretos")
 
     const token = uuid()
+    const name = userAuth.name;
     await db.collection("sessions").insertOne({token, userId: userRegistered._id})
 
-    res.send({token})
+    const auth = token;
+
+    res.send({ auth })
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
