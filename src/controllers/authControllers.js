@@ -16,7 +16,7 @@ export async function signIn(req, res) {
     const token = uuid()
     await db.collection("sessions").insertOne({ token, userId: userRegistered._id })
 
-    res.send(token)
+    res.send({ token, name: userRegistered.name })
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
