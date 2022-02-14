@@ -61,14 +61,16 @@ export async function sendToBag(req, res) {
 
 export async function getBag(req, res) {
   try {
-    let total = 0;
-    const bag = db.collection("bag").find({}).toArray();
-    for (let i = 0; i < bag.lenght; i++) {
-      total += bag.price;
-    }
+    let aux = 0;
+    const bag = await db.collection("bag").find({}).toArray();
 
+    bag.map(item => {
+      const price = item.price.replace(",", ".")
+      aux += parseFloat(price)
+    })
+
+    const total = aux.toString().replace(".", ",")
     res.send({ bag, total });
-
   } catch {
     res.sendStatus(500);
   }
