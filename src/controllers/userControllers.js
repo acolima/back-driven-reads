@@ -20,3 +20,18 @@ export async function signUp(req, res){
     res.sendStatus(500)
   }
 }
+
+export async function addOrder(req, res) {
+  try {
+    const { user } = res.locals
+
+    await db.collection("users").updateOne({ _id: user._id }, { $push: { cart: req.body } })
+
+    await db.collection("bag").deleteMany({})
+
+    res.sendStatus(200)
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500)
+  }
+}

@@ -1,5 +1,15 @@
 import db from "../db.js"
 
+export async function getBook(req, res) {
+  const { isbn } = req.params
+  try {
+    const book = await db.collection("books").findOne({ ISBN: isbn })
+    res.send(book)
+  } catch {
+    res.sendStatus(500)
+  }
+}
+
 export async function getBooks(req, res){
   try{ 
     db.collection("books").insertMany([
@@ -366,35 +376,24 @@ export async function getBooks(req, res){
     ])
     
     const books = await db.collection("books").find({}).toArray();
-    console.log(books);
     res.send({ books })
   } catch {
     res.sendStatus(500)
   }
 };
 
-export async function addBook(req, res){
-  try {
-    const book = req.body;
-    db.collection("books").insertOne({ ...book })
-
-    res.sendStatus(201)
-  } catch {
-    res.sendStatus(500)
-  }
-}
 
 export async function searchBook(req, res) {
   try {
-    const book = req.body;
-    console.log(book.search);
-    const allBooks = await db.collection("books").find({}).toArray();
-    
-    allBooks.filter((book) => book == book)
-    console.group(allBooks);
+    const { text } = req.params;
+
+    const searchedBooks = await db.collection("books").find({ $or: [
+       { "title": new RegExp(text, 'i') },
+       { "author": new RegExp(text, 'i') }
+     ] } ).toArray()
 
 
-    res.sendStatus(201);
+    res.send({ searchedBooks });
   } catch {
     res.sendStatus(500);
   }

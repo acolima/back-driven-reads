@@ -1,9 +1,10 @@
 import { Router } from "express"
-import { getBooks, searchBook } from "../controllers/bookControllers.js"
+import { getBooks, searchBook, getBook } from "../controllers/bookControllers.js"
 
 const bookRouter = Router()
 
 bookRouter.get("/books", getBooks);
-bookRouter.post("/search", searchBook);
+bookRouter.get("/search/:text", searchBook);
+bookRouter.get("/books/:isbn", getBook);
 
 export default bookRouter;
