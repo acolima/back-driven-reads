@@ -1,13 +1,12 @@
 import { Router } from "express";
-import { getBook, getBooks, addBook, searchBook, sendToBag, getBag } from "../controllers/bookControllers.js"
+import { getBook, getBooks } from "../controllers/bookControllers.js"
+import { validateToken } from "../middlewares/index.js";
 
 const bookRouter = Router()
 
+bookRouter.use(validateToken)
+
 bookRouter.get("/books", getBooks);
-bookRouter.get("/search/:text", searchBook);
-bookRouter.post("/books", addBook);
-bookRouter.post("/bag", sendToBag);
-bookRouter.get("/bag", getBag);
 bookRouter.get("/books/:isbn", getBook);
 
 export default bookRouter;
