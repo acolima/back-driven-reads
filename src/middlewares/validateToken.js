@@ -5,12 +5,12 @@ export default async function validateToken(req, res, next) {
   const token = authorization?.replace("Bearer ", "");
 
   if (!token) {
-    return res.status(401).send("Token não existe");
+    return res.sendStatus(401);
   }
 
   const session = await db.collection("sessions").findOne({ token });
   if (!session) {
-    return res.status(401).send("sessão não existe");
+    return res.sendStatus(401);
   }
 
   const user = await db.collection("users").findOne({ _id: session.userId });
